@@ -1,0 +1,8 @@
+// Remove the Yoast SEO Links in the admin bar
+
+function mytheme_admin_bar_render() {
+	global $wp_admin_bar;
+	$wp_admin_bar->remove_menu('wpseo-menu');
+}
+// and we hook our function via
+add_action( 'wp_before_admin_bar_render', 'mytheme_admin_bar_render' );
