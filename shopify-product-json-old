@@ -1,0 +1,38 @@
+{% assign collection_urls = '' %}
+  {% for collection in product.collections %}
+  	 {% assign collection_urls = collection_urls | append: '"' | append: shop.url | append: '/collections/' | append: collection.handle | append: '"' %}
+  	 {% if forloop.last != true %}
+       {% assign collection_urls = collection_urls | append:',' %}
+  	 {% endif %}
+  {% endfor %}
+
+  {% assign current_variant = product.selected_or_first_available_variant %}
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "Product",
+  "url": "{{ shop.url | append: '/products/' | append: product.handle }}",
+  "name": "{{ product.title }}",
+  "image": "{{ product.featured_image.src | img_url: 'master' }}",
+  "description": "{{ product.description | strip_html | escape }}",
+  {% if collection_urls != blank %}
+  "category": [
+    {{ collection_urls }}
+  ],
+  {% endif %}
+  "brand": {
+    "name": "{{ product.vendor }}"
+  },
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "{{ shop.currency }}",
+    "price": "{{ current_variant.price | money }}",
+    "availability": "http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+    "seller": {
+      "@type": "Organization",
+      "name": "{{ shop.name }}"
+    }
+  }
+}
+</script>
