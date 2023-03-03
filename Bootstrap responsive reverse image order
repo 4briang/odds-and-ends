@@ -1,0 +1,9 @@
+<div class="row">
+  <h2>Headline</h2>
+  <div class="col-md-8 col-sm-12 order-1">
+    <p>Lorem ipsum dolor sit amet.</p>
+  </div>
+  <div class="col-md-4 col-sm-12 order-md-1">
+    <img src="http://placehold.it/350x150">
+  </div>
+</div>
