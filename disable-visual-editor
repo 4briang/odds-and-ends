@@ -1,0 +1,2 @@
+// disable visual editor in WordPress - works in Beaver Builder also
+add_filter( 'user_can_richedit' , '__return_false', 50 );
